@@ -18,5 +18,5 @@ export const TaskManager = () => {
             </Text>
             <List items={tasks} />
         </div>
-    )
+    );
 };

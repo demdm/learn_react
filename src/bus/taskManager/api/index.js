@@ -7,6 +7,19 @@ export const api = {
             const response = await fetch(`${api_url}/tasks`);
             return await response.json();
         },
+        create: async (title) => {
+            try {
+                return await fetch(`${api_url}/tasks`, {
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({ title }),
+                });
+            } catch(error) {
+                console.error(error);
+            }
+        },
         remove: async (id) => {
             try {
                 return await fetch(`${api_url}/tasks/${id}`, {
@@ -28,6 +41,6 @@ export const api = {
             } catch(error) {
                 console.error(error);
             }
-        }
+        },
     }
 };
