@@ -1,10 +1,33 @@
+const api_port = 5006;
+const api_url = `http://localhost:${api_port}`;
+
 export const api = {
     tasks: {
         getAll: async () => {
-            const response = await fetch('http://localhost:5000/tasks');
-            const tasks = await response.json();
-
-            return tasks;
+            const response = await fetch(`${api_url}/tasks`);
+            return await response.json();
+        },
+        remove: async (id) => {
+            try {
+                return await fetch(`${api_url}/tasks/${id}`, {
+                    method: 'DELETE',
+                });
+            } catch(error) {
+                console.error(error);
+            }
+        },
+        changeCompletion: async (id, isCompleted) => {
+            try {
+                return await fetch(`${api_url}/tasks/${id}`, {
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    method: 'PATCH',
+                    body: JSON.stringify({ isCompleted }),
+                });
+            } catch(error) {
+                console.error(error);
+            }
         }
     }
 };

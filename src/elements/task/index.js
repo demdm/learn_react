@@ -1,13 +1,22 @@
 // Core
 import React from 'react';
+
+// UI
 import { Checkbox } from '@fluentui/react';
 
-export const Task = ({ isCompleted, label }) => (
-    <>
-        <Checkbox
-            label={label}
-            checked={isCompleted}
-        />
-        <br/>
-    </>
-);
+import { api } from "../../bus/taskManager/api";
+
+export const Task = ({ taskId, isCompleted, label }) => {
+    const onChange = (event, isChecked) => {
+        return api.tasks.changeCompletion(taskId, isChecked);
+    };
+
+    return (
+        <>
+            <Checkbox
+                defaultChecked={isCompleted}
+                onChange={onChange}
+            />
+        </>
+    );
+};
