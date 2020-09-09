@@ -1,44 +1,63 @@
-// Core
 import React, {useState} from 'react';
-
-// UI
 import {
     TextField,
     Stack,
-    PrimaryButton
+    PrimaryButton,
+    Text,
+    MessageBar,
+    MessageBarType,
 } from '@fluentui/react';
 
-import {api} from "../../bus/taskManager/api";
-
-const Add = () => {
+const Add = ({ addTaskCallback }) => {
     const [title, setTitle] = useState('');
+    const [isErrorShown, setIsErrorShown] = useState(false);
 
     const onFormSubmit = event => {
-        if (!title) {
-            alert('Set title!');
-        } else {
-            api.tasks.create(title);
+        if (title) {
+            addTaskCallback(title);
             setTitle('');
+            setIsErrorShown(false);
+        } else {
+            setIsErrorShown(true);
         }
 
         event.preventDefault();
     };
 
-    const onTitleChanged = event => {
-        console.log(event.target.value);
-        setTitle(event.target.value);
-    };
+    const onTitleChanged = event => setTitle(event.target.value);
 
     return (
         <>
-            <Stack horizontal>
+            <Stack horizontal style={{
+                background: '#e9e9e9',
+                padding: 20,
+                borderRadius: 5,
+                width: 'max-content'
+            }}>
                 <form onSubmit={onFormSubmit}>
+                    { isErrorShown &&
+                        <MessageBar
+                            messageBarType={MessageBarType.error}
+                            isMultiline={false}
+                            dismissButtonAriaLabel="Close"
+                        >
+                            Specify a title!
+                        </MessageBar>
+                    }
+
+                    <Text variant='large' nowrap block>
+                        Add task
+                    </Text>
+                    <br/>
+
                     <TextField
                         name='title'
                         placeholder="Task description"
                         onChange={onTitleChanged}
                         value={title}
                     />
+                    <br/>
+
                     <PrimaryButton
                         type='submit'
                         text="Add task"

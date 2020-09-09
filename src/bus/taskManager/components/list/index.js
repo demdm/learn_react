@@ -5,6 +5,7 @@ import React from 'react';
 import { Task } from '../../../../elements/task';
 import Add from '../../../../elements/task/add';
 import Remove from '../../../../elements/task/remove';
+import { useTaskManager } from '../../hooks/useTaskManager';
 
 // UI
 import {
@@ -14,24 +15,20 @@ import {
 } from '@fluentui/react';
 
 export const List = ({ items }) => {
-    // const listJSX = items.map((
-    //     {
-    //         id,
-    //         title,
-    //         isCompleted
-    //     }
-    // ) => (
-    //     <Task
-    //         key={id}
-    //         label={title}
-    //         isCompleted={isCompleted}
-    //     />
-    // ));
+    let {
+        deleteTask,
+        createTask,
+        changeTaskCompletion,
+    } = useTaskManager();
 
     return (
         <>
-            <Fabric>
-                <Add/>
+            <Fabric
+                style={{ width: 'max-content'}}
+            >
+                <Add
+                    addTaskCallback={createTask}
+                />
                 <MarqueeSelection>
                     <DetailsList
                         items={items}
@@ -46,6 +43,7 @@ export const List = ({ items }) => {
                             {
                                 name: 'Task description',
                                 fieldName: 'title',
+                                minWidth: 260,
                             },
                             {
                                 name: 'Complete',
@@ -57,6 +55,7 @@ export const List = ({ items }) => {
                                         taskId={task.id}
                                         label={task.title}
                                         isCompleted={task.isCompleted}
+                                        changeCompletionCallback={changeTaskCompletion}
                                     />
                                 ),
                             },
@@ -65,6 +64,7 @@ export const List = ({ items }) => {
                                 onRender: task => (
                                     <Remove
                                         taskId={task.id}
+                                        removeTaskCallback={deleteTask}
                                     />
                                 ),
                             },
