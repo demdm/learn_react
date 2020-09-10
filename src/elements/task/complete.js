@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox } from '@fluentui/react';
 
-export const Task = ({ taskId, isCompleted, label, changeCompletionCallback }) => {
+const Complete = ({ taskId, isCompleted, label, changeCompletionCallback }) => {
     return (
         <Checkbox
             defaultChecked={isCompleted}
@@ -9,3 +9,5 @@ export const Task = ({ taskId, isCompleted, label, changeCompletionCallback }) =
         />
     );
 };
+
+export default Complete;

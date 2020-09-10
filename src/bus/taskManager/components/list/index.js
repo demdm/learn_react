@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Elements
-import { Task } from '../../../../elements/task';
+import Complete from '../../../../elements/task/complete';
 import Add from '../../../../elements/task/add';
 import Remove from '../../../../elements/task/remove';
 import { useTaskManager } from '../../hooks/useTaskManager';
@@ -14,8 +14,9 @@ import {
     DetailsList,
 } from '@fluentui/react';
 
-export const List = ({ items }) => {
+export const List = () => {
     let {
+        tasks,
         deleteTask,
         createTask,
         changeTaskCompletion,
@@ -31,7 +32,7 @@ export const List = ({ items }) => {
                 />
                 <MarqueeSelection>
                     <DetailsList
-                        items={items}
+                        items={tasks}
                         compact={true}
                         columns={[
                             {
@@ -51,7 +52,7 @@ export const List = ({ items }) => {
                                 minWidth: 124,
                                 maxWidth: 124,
                                 onRender: task => (
-                                    <Task
+                                    <Complete
                                         taskId={task.id}
                                         label={task.title}
                                         isCompleted={task.isCompleted}
