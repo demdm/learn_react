@@ -1,11 +1,10 @@
-const api_port = 5006;
+const api_port = 5011;
 const api_url = `http://localhost:${api_port}`;
 
 export const api = {
     tasks: {
         getAll: async () => {
-            const response = await fetch(`${api_url}/tasks`);
-            return await response.json();
+            return await fetch(`${api_url}/tasks`);
         },
         create: async (title) => {
             try {

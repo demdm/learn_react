@@ -1,0 +1,7 @@
+export const types = {
+    // Sync
+    TASK_MANAGER_FILL_TASKS: 'TASK_MANAGER_FILL_TASKS',
+
+    // Async
+    TASK_MANAGER_FETCH_TASKS_ASYNC: 'TASK_MANAGER_FETCH_TASKS_ASYNC',
+};

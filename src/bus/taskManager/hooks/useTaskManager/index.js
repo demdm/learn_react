@@ -1,37 +1,34 @@
 // Core
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 
 // API
-import { api } from '../../api';
+import { taskManagerActions } from "../../actions";
 
 export const useTaskManager = () => {
-    const [tasks, setTasks] = useState([]);
+    const dispatch = useDispatch();
+    const { tasks } = useSelector(state => state.taskManager);
 
     useEffect(() => {
-        getFromApiAndSetTasks();
-    }, []);
+        dispatch(taskManagerActions.fetchTasksAsync(tasks));
+    }, [dispatch]);
 
-    const getFromApiAndSetTasks = async () => {
-        const tasks = await api.tasks.getAll();
-        setTasks(tasks);
-    };
+    // const deleteTask = async id => {
+    //     await api.tasks.remove(id);
+    //     getFromApiAndSetTasks();
+    // };
 
-    const deleteTask = async id => {
-        await api.tasks.remove(id);
-        getFromApiAndSetTasks();
-    };
+    // const createTask = async title => {
+    //     await api.tasks.create(title);
+    //     getFromApiAndSetTasks();
+    // };
 
-    const createTask = async title => {
-        await api.tasks.create(title);
-        getFromApiAndSetTasks();
-    };
-
-    const changeTaskCompletion = async (id, isCompleted) => await api.tasks.changeCompletion(id, isCompleted);
+    // const changeTaskCompletion = async (id, isCompleted) => await api.tasks.changeCompletion(id, isCompleted);
 
     return {
         tasks,
-        deleteTask,
-        createTask,
-        changeTaskCompletion,
+        deleteTask: () => {},
+        createTask: () => {},
+        changeTaskCompletion: () => {},
     };
 };
