@@ -9,9 +9,14 @@ export const useTaskManager = () => {
     const dispatch = useDispatch();
     const { tasks } = useSelector(state => state.taskManager);
 
-    useEffect(() => {
-        dispatch(taskManagerActions.fetchTasksAsync(tasks));
-    }, [dispatch]);
+    useEffect(
+        () => {
+            dispatch(taskManagerActions.fetchTasksAsync(tasks));
+        },
+        [
+            dispatch,
+        ]
+    );
 
     // const deleteTask = async id => {
     //     await api.tasks.remove(id);

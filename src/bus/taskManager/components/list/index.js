@@ -10,8 +10,6 @@ import { useTaskManager } from '../../hooks/useTaskManager';
 // UI
 import {
     Fabric,
-    MarqueeSelection,
-    DetailsList,
 } from '@fluentui/react';
 
 export const List = () => {
@@ -30,60 +28,49 @@ export const List = () => {
                 <Add
                     addTaskCallback={createTask}
                 />
-                <MarqueeSelection>
-                    <DetailsList
-                        items={tasks}
-                        compact={true}
-                        columns={[
+
+                <table>
+                    <thead>
+                        <tr style={{ fontWeight: 600 }}>
+                            <td>ID</td>
+                            <td>Description</td>
+                            <td>Complete</td>
+                            <td>Remove</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { tasks.map((
                             {
-                                name: 'ID',
-                                fieldName: 'id',
-                                minWidth: 16,
-                                maxWidth: 16,
-                            },
-                            {
-                                name: 'Task description',
-                                fieldName: 'title',
-                                minWidth: 260,
-                            },
-                            {
-                                name: 'Complete',
-                                fieldName: 'isCompleted',
-                                minWidth: 124,
-                                maxWidth: 124,
-                                onRender: task => (
+                                id,
+                                title,
+                                isCompleted
+                            }
+                        ) => (
+                            <tr key={id}>
+                                <td style={{ minWidth: 70 }}>
+                                    {id}
+                                </td>
+                                <td style={{ minWidth: 200 }}>
+                                    {title}
+                                </td>
+                                <td style={{ minWidth: 100 }}>
                                     <Complete
-                                        taskId={task.id}
-                                        label={task.title}
-                                        isCompleted={task.isCompleted}
+                                        taskId={id}
+                                        label={title}
+                                        isCompleted={isCompleted}
                                         changeCompletionCallback={changeTaskCompletion}
                                     />
-                                ),
-                            },
-                            {
-                                name: 'Remove',
-                                onRender: task => (
+                                </td>
+                                <td style={{ minWidth: 100 }}>
                                     <Remove
-                                        taskId={task.id}
+                                        taskId={id}
                                         removeTaskCallback={deleteTask}
                                     />
-                                ),
-                            },
-                        ]}
-                        // selectionMode={SelectionMode.multiple}
-                        getKey={(item, index) => item.id}
-                        setKey='multiple'
-                        // layoutMode={DetailsListLayoutMode.justified}
-                        isHeaderVisible={true}
-                        // selection={this._selection}
-                        selectionPreservedOnEmptyClick={false}
-                        // onItemInvoked={this._onItemInvoked}
-                        enterModalSelectionOnTouch={false}
-                        ariaLabelForSelectionColumn="Toggle selection"
-                        ariaLabelForSelectAllCheckbox="Toggle selection for all items"
-                        checkButtonAriaLabel="Row checkbox"
-                    />
-                </MarqueeSelection>
+                                </td>
+                            </tr>
+                        )) }
+                    </tbody>
+                </table>
             </Fabric>
         </>
     )

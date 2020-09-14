@@ -7,5 +7,7 @@ import {
 } from '../bus/taskManager/saga/watchers';
 
 export function* rootSaga() {
-    yield all([ watchTaskManager() ]);
+    yield all([
+        watchTaskManager(),
+    ]);
 }
