@@ -11,29 +11,17 @@ export const useTaskManager = () => {
 
     useEffect(
         () => {
-            dispatch(taskManagerActions.fetchTasksAsync(tasks));
+            dispatch(taskManagerActions.fetchTasksAsync());
         },
         [
             dispatch,
         ]
     );
 
-    // const deleteTask = async id => {
-    //     await api.tasks.remove(id);
-    //     getFromApiAndSetTasks();
-    // };
-
-    // const createTask = async title => {
-    //     await api.tasks.create(title);
-    //     getFromApiAndSetTasks();
-    // };
-
-    // const changeTaskCompletion = async (id, isCompleted) => await api.tasks.changeCompletion(id, isCompleted);
-
     return {
         tasks,
-        deleteTask: () => {},
-        createTask: () => {},
-        changeTaskCompletion: () => {},
+        removeTask: async id => dispatch(taskManagerActions.removeTaskAsync(id)),
+        createTask: async title => dispatch(taskManagerActions.createTaskAsync(title)),
+        changeTaskCompletion: async (id, isCompleted) => dispatch(taskManagerActions.completeTaskAsync(id, isCompleted)),
     };
 };

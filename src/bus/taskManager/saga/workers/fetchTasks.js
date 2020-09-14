@@ -7,20 +7,16 @@ import { api } from '../../api';
 
 export function* fetchTasks() {
     try {
-        // Turn on Spinner
         const response = yield call(api.tasks.getAll);
-        const tasks  = yield call([response, response.json]);
+        const tasks = yield call([response, response.json]);
 
         if (response.status !== 200) {
-            throw new Error('Something went wrong');
+            throw new Error('Something went wrong. Can\'t get tasks!');
         }
 
         yield delay(200);
         yield put(taskManagerActions.fillTasks(tasks));
-    } catch (e) {
-        console.log(e);
-        // Write error in Redux
+    } catch (error) {
     } finally {
-        // Turn off Spinner
     }
 }

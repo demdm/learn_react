@@ -8,14 +8,12 @@ import Remove from '../../../../elements/task/remove';
 import { useTaskManager } from '../../hooks/useTaskManager';
 
 // UI
-import {
-    Fabric,
-} from '@fluentui/react';
+import { Fabric } from '@fluentui/react';
 
 export const List = () => {
     let {
         tasks,
-        deleteTask,
+        removeTask,
         createTask,
         changeTaskCompletion,
     } = useTaskManager();
@@ -64,7 +62,7 @@ export const List = () => {
                                 <td style={{ minWidth: 100 }}>
                                     <Remove
                                         taskId={id}
-                                        removeTaskCallback={deleteTask}
+                                        removeTaskCallback={removeTask}
                                     />
                                 </td>
                             </tr>
