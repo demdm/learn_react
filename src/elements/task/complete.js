@@ -19,7 +19,7 @@ const Complete = ({ taskId, isCompleted, label, changeCompletionCallback }) => {
         }
     } = useSelector(state => state.taskManager);
 
-    const isCheckboxChecked = wasCompleted !== null ? wasCompleted : isCompleted;
+    const isCheckboxChecked = wasCompleted !== null && taskId === checkedTaskId ? wasCompleted : isCompleted;
 
     return isSpinnerShown && taskId === checkedTaskId
         ? <Spinner
