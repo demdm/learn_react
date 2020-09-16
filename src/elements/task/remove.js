@@ -5,31 +5,39 @@ import {
     Spinner,
     SpinnerSize,
 } from '@fluentui/react';
+import './remove.css';
 
 const Remove = ({ taskId, removeTaskCallback }) => {
     const {
         taskRemovingStatus: {
             id: removedTaskId = null,
-            isTaskRemoving: isSpinnerShown = false,
+            isTaskRemoving = false,
         } = {
             removedTaskId: null,
-            isSpinnerShown: false,
+            isTaskRemoving: false,
         }
     } = useSelector(state => state.taskManager);
 
-    return isSpinnerShown && removedTaskId === taskId
-        ? <Spinner
-            labelPosition="right"
-            label='Removing...'
-            size={SpinnerSize.medium}
-        />
-        : <IconButton
-            iconProps={{ iconName: 'Cancel' }}
-            title={`Remove task ${taskId}`}
-            ariaLabel="Cancel"
-            onClick={() => removeTaskCallback(taskId)}
-        />
-    ;
+    const isSpinnerShown = isTaskRemoving && removedTaskId === taskId;
+
+    return (
+        <>
+            <IconButton
+                disabled={isSpinnerShown}
+                iconProps={{ iconName: 'Cancel' }}
+                title={`Remove task ${taskId}`}
+                ariaLabel="Cancel"
+                onClick={() => removeTaskCallback(taskId)}
+            />
+            { isSpinnerShown &&
+                <Spinner
+                    className={'removeTaskSpinner'}
+                    labelPosition="right"
+                    size={SpinnerSize.medium}
+                />
+            }
+        </>
+    );
 };
 
 export default Remove;
