@@ -6,6 +6,7 @@ import Complete from '../../../../elements/task/complete';
 import Add from '../../../../elements/task/add';
 import Remove from '../../../../elements/task/remove';
 import { useTaskManager } from '../../hooks/useTaskManager';
+import Message from "../message";
 
 // UI
 import { Fabric } from '@fluentui/react';
@@ -23,6 +24,8 @@ export const List = () => {
             <Fabric
                 style={{ width: 'max-content'}}
             >
+                <Message/>
+
                 <Add
                     addTaskCallback={createTask}
                 />

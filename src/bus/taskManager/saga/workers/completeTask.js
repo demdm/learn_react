@@ -1,5 +1,5 @@
 // Core
-import {call, delay, put} from 'redux-saga/effects';
+import { call, delay, put } from 'redux-saga/effects';
 
 // Other
 import { taskManagerActions } from "../../actions";
@@ -12,8 +12,13 @@ export function* completeTask(data) {
         yield put(taskManagerActions.completingTask(id, isCompleted, true));
 
         const response = yield call(api.tasks.changeCompletion, id, isCompleted);
+        const responseStatus = response.status;
 
-        if (response.status !== 200) {
+        if (responseStatus !== 200) {
+            if (responseStatus >= 400 && responseStatus <= 599) {
+                yield put(taskManagerActions.renderErrorApiResponseMessage(responseStatus, true));
+            }
+
             throw new Error('Something went wrong. Can\'t complete task!');
         }
 

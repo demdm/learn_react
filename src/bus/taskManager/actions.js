@@ -26,6 +26,13 @@ export const taskManagerActions = {
             isTaskCompleting,
         },
     }),
+    renderErrorApiResponseMessage: (responseStatusCode, isMessageRendered) => ({
+        type: types.TASK_MANAGER_RENDER_ERROR_API_RESPONSE_MESSAGE,
+        payload: {
+            responseStatusCode,
+            isMessageRendered,
+        },
+    }),
 
     // Async
     fetchTasksAsync: () => ({

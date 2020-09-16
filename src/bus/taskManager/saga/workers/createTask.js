@@ -13,6 +13,10 @@ export function* createTask(data) {
         const createResponse = yield call(api.tasks.create, title);
 
         if (createResponse.status !== 201) {
+            if (createResponse.status >= 400 && createResponse.status <= 599) {
+                yield put(taskManagerActions.renderErrorApiResponseMessage(createResponse.status, true));
+            }
+
             throw new Error('Something went wrong. Can\'t create task!');
         }
 
@@ -20,6 +24,10 @@ export function* createTask(data) {
         const tasks = yield call([getAllResponse, getAllResponse.json]);
 
         if (getAllResponse.status !== 200) {
+            if (createResponse.status >= 400 && createResponse.status <= 599) {
+                yield put(taskManagerActions.renderErrorApiResponseMessage(createResponse.status, true));
+            }
+
             throw new Error('Something went wrong. Can\'t get tasks!');
         }
 

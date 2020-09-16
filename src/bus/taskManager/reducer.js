@@ -33,6 +33,11 @@ export const taskManagerReducer = (
                 ...state,
                 taskRemovingStatus: action.payload,
             };
+        case types.TASK_MANAGER_RENDER_ERROR_API_RESPONSE_MESSAGE:
+            return {
+                ...state,
+                errorApiResponse: action.payload,
+            };
         default:
             return state;
     }
