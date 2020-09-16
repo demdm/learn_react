@@ -30,48 +30,50 @@ export const List = () => {
                     addTaskCallback={createTask}
                 />
 
-                <table>
-                    <thead>
-                        <tr style={{ fontWeight: 600 }}>
-                            <td>ID</td>
-                            <td>Description</td>
-                            <td>Complete</td>
-                            <td>Remove</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { tasks.map((
-                            {
-                                id,
-                                title,
-                                isCompleted
-                            }
-                        ) => (
-                            <tr key={id}>
-                                <td style={{ width: 70 }}>
-                                    {id}
-                                </td>
-                                <td style={{ width: 240 }}>
-                                    {title}
-                                </td>
-                                <td style={{ width: 140 }}>
-                                    <Complete
-                                        taskId={id}
-                                        label={title}
-                                        isCompleted={isCompleted}
-                                        changeCompletionCallback={changeTaskCompletion}
-                                    />
-                                </td>
-                                <td style={{ minWidth: 140 }}>
-                                    <Remove
-                                        taskId={id}
-                                        removeTaskCallback={removeTask}
-                                    />
-                                </td>
+                { tasks.length > 0 &&
+                    <table>
+                        <thead>
+                            <tr style={{ fontWeight: 600 }}>
+                                <td>ID</td>
+                                <td>Description</td>
+                                <td>Complete</td>
+                                <td>Remove</td>
                             </tr>
-                        )) }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            { tasks.map((
+                                {
+                                    id,
+                                    title,
+                                    isCompleted
+                                }
+                            ) => (
+                                <tr key={id}>
+                                    <td style={{ width: 70 }}>
+                                        {id}
+                                    </td>
+                                    <td style={{ width: 240 }}>
+                                        {title}
+                                    </td>
+                                    <td style={{ width: 140 }}>
+                                        <Complete
+                                            taskId={id}
+                                            label={title}
+                                            isCompleted={isCompleted}
+                                            changeCompletionCallback={changeTaskCompletion}
+                                        />
+                                    </td>
+                                    <td style={{ minWidth: 140 }}>
+                                        <Remove
+                                            taskId={id}
+                                            removeTaskCallback={removeTask}
+                                        />
+                                    </td>
+                                </tr>
+                            )) }
+                        </tbody>
+                    </table>
+                }
             </Fabric>
         </>
     )

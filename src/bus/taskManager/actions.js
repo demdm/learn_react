@@ -13,7 +13,7 @@ export const taskManagerActions = {
     }),
     removingTask: (id, isTaskRemoving) => ({
         type: types.TASK_MANAGER_START_REMOVING_TASK,
-        payload:  {
+        payload: {
             id,
             isTaskRemoving,
         },

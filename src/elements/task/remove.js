@@ -10,11 +10,8 @@ import './remove.css';
 const Remove = ({ taskId, removeTaskCallback }) => {
     const {
         taskRemovingStatus: {
-            id: removedTaskId = null,
-            isTaskRemoving = false,
-        } = {
-            removedTaskId: null,
-            isTaskRemoving: false,
+            id: removedTaskId,
+            isTaskRemoving,
         }
     } = useSelector(state => state.taskManager);
 

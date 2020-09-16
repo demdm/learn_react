@@ -3,6 +3,16 @@ import { types } from './types';
 
 const initialState = {
     tasks: [],
+    taskCompletionStatus: {
+        id: null,
+        isTaskCompleting: false,
+        isCompleted: null,
+    },
+    taskRemovingStatus: {
+        id: null,
+        isTaskRemoving: false,
+    },
+    isTaskCreating: false,
 };
 
 export const taskManagerReducer = (

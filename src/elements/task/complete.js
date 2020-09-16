@@ -10,13 +10,9 @@ import './complete.css';
 const Complete = ({ taskId, isCompleted, label, changeCompletionCallback }) => {
     const {
         taskCompletionStatus: {
-            id: checkedTaskId = null,
-            isTaskCompleting = false,
-            isCompleted: wasCompleted = null,
-        } = {
-            checkedTaskId: null,
-            isTaskCompleting: false,
-            wasCompleted: null,
+            id: checkedTaskId,
+            isTaskCompleting,
+            isCompleted: wasCompleted,
         }
     } = useSelector(state => state.taskManager);
 
