@@ -45,13 +45,13 @@ export const List = () => {
                             }
                         ) => (
                             <tr key={id}>
-                                <td style={{ minWidth: 70 }}>
+                                <td style={{ width: 70 }}>
                                     {id}
                                 </td>
-                                <td style={{ minWidth: 200 }}>
+                                <td style={{ width: 240 }}>
                                     {title}
                                 </td>
-                                <td style={{ minWidth: 100 }}>
+                                <td style={{ width: 140 }}>
                                     <Complete
                                         taskId={id}
                                         label={title}
@@ -59,7 +59,7 @@ export const List = () => {
                                         changeCompletionCallback={changeTaskCompletion}
                                     />
                                 </td>
-                                <td style={{ minWidth: 100 }}>
+                                <td style={{ minWidth: 140 }}>
                                     <Remove
                                         taskId={id}
                                         removeTaskCallback={removeTask}

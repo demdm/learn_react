@@ -6,8 +6,10 @@ import { taskManagerActions } from "../../actions";
 import { api } from '../../api';
 
 export function* removeTask(data) {
+    const { payload: id } = data;
+
     try {
-        const { payload: id } = data;
+        yield put(taskManagerActions.removingTask(id, true));
         const removeResponse = yield call(api.tasks.remove, id);
 
         if (removeResponse.status !== 200) {
@@ -21,9 +23,10 @@ export function* removeTask(data) {
             throw new Error('Something went wrong. Can\'t get tasks!');
         }
 
-        yield delay(200);
+        yield delay(1000);
         yield put(taskManagerActions.fillTasks(tasks));
     } catch (error) {
     } finally {
+        yield put(taskManagerActions.removingTask(id, false));
     }
 }

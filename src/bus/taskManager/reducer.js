@@ -15,6 +15,24 @@ export const taskManagerReducer = (
                 ...state,
                 tasks: action.payload
             };
+        case types.TASK_MANAGER_START_COMPLETING_TASK:
+        case types.TASK_MANAGER_STOP_COMPLETING_TASK:
+            return {
+                ...state,
+                taskCompletionStatus: action.payload,
+            };
+        case types.TASK_MANAGER_START_CREATING_TASK:
+        case types.TASK_MANAGER_STOP_CREATING_TASK:
+            return {
+                ...state,
+                isTaskCreating: action.payload,
+            };
+        case types.TASK_MANAGER_START_REMOVING_TASK:
+        case types.TASK_MANAGER_STOP_REMOVING_TASK:
+            return {
+                ...state,
+                taskRemovingStatus: action.payload,
+            };
         default:
             return state;
     }

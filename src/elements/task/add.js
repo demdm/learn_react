@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { useSelector } from "react-redux";
 import {
     TextField,
     Stack,
@@ -6,9 +7,13 @@ import {
     Text,
     MessageBar,
     MessageBarType,
+    Spinner,
+    SpinnerSize,
 } from '@fluentui/react';
 
 const Add = ({ addTaskCallback }) => {
+    const { isTaskCreating: isFormDisabled } = useSelector(state => state.taskManager);
+
     const [title, setTitle] = useState('');
     const [isErrorShown, setIsErrorShown] = useState(false);
 
@@ -60,7 +65,12 @@ const Add = ({ addTaskCallback }) => {
 
                     <PrimaryButton
                         type='submit'
-                        text="Add task"
+                        text={
+                            isFormDisabled
+                                ? <Spinner size={SpinnerSize.medium}/>
+                                : 'Add task'
+                        }
+                        disabled={isFormDisabled}
                     />
                 </form>
             </Stack>

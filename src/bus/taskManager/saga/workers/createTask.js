@@ -7,6 +7,8 @@ import { api } from '../../api';
 
 export function* createTask(data) {
     try {
+        yield put(taskManagerActions.creatingTask(true));
+
         const { payload: title } = data;
         const createResponse = yield call(api.tasks.create, title);
 
@@ -21,9 +23,10 @@ export function* createTask(data) {
             throw new Error('Something went wrong. Can\'t get tasks!');
         }
 
-        yield delay(200);
+        yield delay(1000);
         yield put(taskManagerActions.fillTasks(tasks));
     } catch (error) {
     } finally {
+        yield put(taskManagerActions.creatingTask(false));
     }
 }
