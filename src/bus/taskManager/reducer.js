@@ -3,15 +3,8 @@ import { types } from './types';
 
 const initialState = {
     tasks: [],
-    taskCompletionStatus: {
-        id: null,
-        isTaskCompleting: false,
-        isCompleted: null,
-    },
-    taskRemovingStatus: {
-        id: null,
-        isTaskRemoving: false,
-    },
+    taskCompletionStatus: [],
+    taskRemovingStatus: [],
     isTaskCreating: false,
 };
 
@@ -25,23 +18,26 @@ export const taskManagerReducer = (
                 ...state,
                 tasks: action.payload
             };
-        case types.TASK_MANAGER_START_COMPLETING_TASK:
-        case types.TASK_MANAGER_STOP_COMPLETING_TASK:
+        case types.TASK_MANAGER_COMPLETING_TASK:
+            let taskCompletionStatus = state.taskCompletionStatus;
+            taskCompletionStatus[action.payload.id] = action.payload;
+
             return {
                 ...state,
-                taskCompletionStatus: action.payload,
+                taskCompletionStatus,
             };
-        case types.TASK_MANAGER_START_CREATING_TASK:
-        case types.TASK_MANAGER_STOP_CREATING_TASK:
+        case types.TASK_MANAGER_CREATING_TASK:
             return {
                 ...state,
                 isTaskCreating: action.payload,
             };
-        case types.TASK_MANAGER_START_REMOVING_TASK:
-        case types.TASK_MANAGER_STOP_REMOVING_TASK:
+        case types.TASK_MANAGER_REMOVING_TASK:
+            let taskRemovingStatus = state.taskRemovingStatus;
+            taskRemovingStatus[action.payload.id] = action.payload;
+
             return {
                 ...state,
-                taskRemovingStatus: action.payload,
+                taskRemovingStatus,
             };
         case types.TASK_MANAGER_RENDER_ERROR_API_RESPONSE_MESSAGE:
             return {

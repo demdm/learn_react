@@ -8,18 +8,18 @@ export const taskManagerActions = {
         payload: tasks,
     }),
     creatingTask: isTaskCreating => ({
-        type: types.TASK_MANAGER_START_CREATING_TASK,
+        type: types.TASK_MANAGER_CREATING_TASK,
         payload: isTaskCreating,
     }),
     removingTask: (id, isTaskRemoving) => ({
-        type: types.TASK_MANAGER_START_REMOVING_TASK,
+        type: types.TASK_MANAGER_REMOVING_TASK,
         payload: {
             id,
             isTaskRemoving,
         },
     }),
     completingTask: (id, isCompleted, isTaskCompleting) => ({
-        type: types.TASK_MANAGER_START_COMPLETING_TASK,
+        type: types.TASK_MANAGER_COMPLETING_TASK,
         payload: {
             id,
             isCompleted,

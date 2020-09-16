@@ -9,13 +9,17 @@ import './remove.css';
 
 const Remove = ({ taskId, removeTaskCallback }) => {
     const {
-        taskRemovingStatus: {
-            id: removedTaskId,
-            isTaskRemoving,
-        }
+        taskRemovingStatus
     } = useSelector(state => state.taskManager);
 
-    const isSpinnerShown = isTaskRemoving && removedTaskId === taskId;
+    let isSpinnerShown = false;
+
+    taskRemovingStatus.forEach(item => {
+        if (item.id === taskId) {
+            isSpinnerShown = item.isTaskRemoving;
+            return true;
+        }
+    });
 
     return (
         <>

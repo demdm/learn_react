@@ -9,16 +9,21 @@ import './complete.css';
 
 const Complete = ({ taskId, isCompleted, label, changeCompletionCallback }) => {
     const {
-        taskCompletionStatus: {
-            id: checkedTaskId,
-            isTaskCompleting,
-            isCompleted: wasCompleted,
-        }
+        taskCompletionStatus
     } = useSelector(state => state.taskManager);
 
-    const isSpinnerShown = isTaskCompleting && taskId === checkedTaskId;
-    const isCheckboxDisabled = isSpinnerShown;
-    const isCheckboxChecked = wasCompleted !== null && taskId === checkedTaskId ? wasCompleted : isCompleted;
+    let isSpinnerShown = false,
+        isCheckboxDisabled = false,
+        isCheckboxChecked = isCompleted;
+
+    taskCompletionStatus.forEach(item => {
+        if (item.id === taskId) {
+            isSpinnerShown = item.isTaskCompleting;
+            isCheckboxDisabled = isSpinnerShown;
+            isCheckboxChecked = item.isCompleted !== null ? item.isCompleted : isCompleted;
+            return true;
+        }
+    });
 
     return (
         <>
