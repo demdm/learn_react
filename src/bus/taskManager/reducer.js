@@ -3,8 +3,8 @@ import { types } from './types';
 
 const initialState = {
     tasks: [],
-    taskCompletionStatus: [],
-    taskRemovingStatus: [],
+    tasksCompletingStatus: [],
+    tasksRemovingStatus: [],
     isTaskCreating: false,
 };
 
@@ -19,12 +19,12 @@ export const taskManagerReducer = (
                 tasks: action.payload
             };
         case types.TASK_MANAGER_COMPLETING_TASK:
-            let taskCompletionStatus = state.taskCompletionStatus;
-            taskCompletionStatus[action.payload.id] = action.payload;
+            let tasksCompletingStatus = state.tasksCompletingStatus;
+            tasksCompletingStatus[action.payload.id] = action.payload;
 
             return {
                 ...state,
-                taskCompletionStatus,
+                tasksCompletingStatus,
             };
         case types.TASK_MANAGER_CREATING_TASK:
             return {
@@ -32,12 +32,12 @@ export const taskManagerReducer = (
                 isTaskCreating: action.payload,
             };
         case types.TASK_MANAGER_REMOVING_TASK:
-            let taskRemovingStatus = state.taskRemovingStatus;
-            taskRemovingStatus[action.payload.id] = action.payload;
+            let tasksRemovingStatus = state.tasksRemovingStatus;
+            tasksRemovingStatus[action.payload.id] = action.payload;
 
             return {
                 ...state,
-                taskRemovingStatus,
+                tasksRemovingStatus,
             };
         case types.TASK_MANAGER_RENDER_ERROR_API_RESPONSE_MESSAGE:
             return {

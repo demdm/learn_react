@@ -4,7 +4,6 @@ import { put, call, delay, } from 'redux-saga/effects';
 // Other
 import { taskManagerActions } from "../../actions";
 import { api } from '../../api';
-import { fetchTasks } from "./fetchTasks";
 
 export function* removeTask(data) {
     const { payload: id } = data;
@@ -21,10 +20,8 @@ export function* removeTask(data) {
             throw new Error('Something went wrong. Can\'t remove task!');
         }
 
-        const tasks = yield fetchTasks();
-
         yield delay(1000);
-        yield put(taskManagerActions.fillTasks(tasks));
+        yield put(taskManagerActions.fetchTasksAsync());
     } catch (error) {
     } finally {
         yield put(taskManagerActions.removingTask(id, false));

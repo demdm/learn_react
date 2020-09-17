@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSelector } from "react-redux";
 import {
     TextField,
     Stack,
@@ -11,9 +10,10 @@ import {
     SpinnerSize,
 } from '@fluentui/react';
 
-const Add = ({ addTaskCallback }) => {
-    const { isTaskCreating: isFormDisabled } = useSelector(state => state.taskManager);
-
+const Add = ({
+    addTaskCallback,
+    isTaskCreating: isFormDisabled,
+}) => {
     const [title, setTitle] = useState('');
     const [isErrorShown, setIsErrorShown] = useState(false);
 

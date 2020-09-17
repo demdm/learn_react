@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { useSelector } from "react-redux";
 
 // Elements
 import Complete from '../../../../elements/task/complete';
@@ -19,6 +20,12 @@ export const List = () => {
         changeTaskCompletion,
     } = useTaskManager();
 
+    const {
+        tasksRemovingStatus,
+        tasksCompletingStatus,
+        isTaskCreating,
+    } = useSelector(state => state.taskManager);
+
     return (
         <>
             <Fabric
@@ -28,6 +35,7 @@ export const List = () => {
 
                 <Add
                     addTaskCallback={createTask}
+                    isTaskCreating={isTaskCreating}
                 />
 
                 { tasks.length > 0 &&
@@ -58,15 +66,16 @@ export const List = () => {
                                     <td style={{ width: 140 }}>
                                         <Complete
                                             taskId={id}
-                                            label={title}
                                             isCompleted={isCompleted}
                                             changeCompletionCallback={changeTaskCompletion}
+                                            taskCompletingStatus={ tasksCompletingStatus[id] || null }
                                         />
                                     </td>
                                     <td style={{ minWidth: 140 }}>
                                         <Remove
                                             taskId={id}
                                             removeTaskCallback={removeTask}
+                                            taskRemovingStatus={ tasksRemovingStatus[id] || null }
                                         />
                                     </td>
                                 </tr>

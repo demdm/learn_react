@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from "react-redux";
 import {
     IconButton,
     Spinner,
@@ -7,19 +6,12 @@ import {
 } from '@fluentui/react';
 import './remove.css';
 
-const Remove = ({ taskId, removeTaskCallback }) => {
-    const {
-        taskRemovingStatus
-    } = useSelector(state => state.taskManager);
-
-    let isSpinnerShown = false;
-
-    taskRemovingStatus.forEach(item => {
-        if (item.id === taskId) {
-            isSpinnerShown = item.isTaskRemoving;
-            return true;
-        }
-    });
+const Remove = ({
+    taskId,
+    removeTaskCallback,
+    taskRemovingStatus = null,
+}) => {
+    const isSpinnerShown = null !== taskRemovingStatus && taskRemovingStatus.isTaskRemoving;
 
     return (
         <>

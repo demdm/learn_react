@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from "react-redux";
 import {
     Checkbox,
     Spinner,
@@ -7,23 +6,21 @@ import {
 } from '@fluentui/react';
 import './complete.css';
 
-const Complete = ({ taskId, isCompleted, label, changeCompletionCallback }) => {
-    const {
-        taskCompletionStatus
-    } = useSelector(state => state.taskManager);
-
+const Complete = ({
+    taskId,
+    isCompleted,
+    changeCompletionCallback,
+    taskCompletingStatus = null,
+}) => {
     let isSpinnerShown = false,
         isCheckboxDisabled = false,
         isCheckboxChecked = isCompleted;
 
-    taskCompletionStatus.forEach(item => {
-        if (item.id === taskId) {
-            isSpinnerShown = item.isTaskCompleting;
-            isCheckboxDisabled = isSpinnerShown;
-            isCheckboxChecked = item.isCompleted !== null ? item.isCompleted : isCompleted;
-            return true;
-        }
-    });
+    if (null !== taskCompletingStatus) {
+        isSpinnerShown = taskCompletingStatus.isTaskCompleting;
+        isCheckboxDisabled = isSpinnerShown;
+        isCheckboxChecked = taskCompletingStatus.isCompleted;
+    }
 
     return (
         <>

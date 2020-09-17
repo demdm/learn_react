@@ -4,7 +4,6 @@ import { put, call, delay, } from 'redux-saga/effects';
 // Other
 import { taskManagerActions } from "../../actions";
 import { api } from '../../api';
-import { fetchTasks } from "./fetchTasks";
 
 export function* createTask(data) {
     try {
@@ -21,10 +20,8 @@ export function* createTask(data) {
             throw new Error('Something went wrong. Can\'t create task!');
         }
 
-        const tasks = yield fetchTasks();
-
         yield delay(1000);
-        yield put(taskManagerActions.fillTasks(tasks));
+        yield put(taskManagerActions.fetchTasksAsync());
     } catch (error) {
     } finally {
         yield put(taskManagerActions.creatingTask(false));
