@@ -20,6 +20,8 @@ export function* fetchTasks() {
 
         yield delay(200);
         yield put(taskManagerActions.fillTasks(tasks));
+
+        return tasks;
     } catch (error) {
     } finally {
     }
